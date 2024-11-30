@@ -48,13 +48,10 @@ public class PhongBanDao {
     public PhongBan addPhongBan(PhongBan phongBan) throws SQLException {
         String sql = MessageFormat.format("INSERT INTO `phongban`(`idpb`, `tenpb`, `mota`) VALUES (''{0}'',''{1}'',''{2}'')", phongBan.getIdPb(), phongBan.getTenPb(), phongBan.getDesc());
         boolean result = quanLyNspbDb.execute(sql);
-        if (result) {
-            return phongBan;
-        }
-        return null;
+        return phongBan;
     }
     public int updatePhongBan(PhongBan phongBan) throws SQLException {
-        String sql = MessageFormat.format("UPDATE `phongban` SET `idpb`='[value-1]',`tenpb`='[value-2]',`mota`='[value-3]' WHERE `idpb` = ''{0}''", phongBan.getIdPb());
+        String sql = MessageFormat.format("UPDATE `phongban` SET `tenpb`=''{0}'',`mota`=''{1}'' WHERE `idpb` = ''{2}''", phongBan.getTenPb(), phongBan.getDesc(), phongBan.getIdPb());
         return quanLyNspbDb.executeUpdate(sql);
     }
     public int deletePhongBan(String id) throws SQLException {

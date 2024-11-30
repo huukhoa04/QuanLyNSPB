@@ -15,7 +15,7 @@ import java.io.Serial;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-@WebServlet("/phongban")
+@WebServlet("/PhongBanServlet/index")
 public class _index extends HttpServlet {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -27,7 +27,7 @@ public class _index extends HttpServlet {
             ArrayList<PhongBan> arrayList = phongBanBo.getAllPhongBan();
             if(!arrayList.isEmpty()){
                 req.setAttribute("phongban", arrayList);
-                req.getRequestDispatcher("phongban/index.jsp").forward(req, resp);
+                req.getRequestDispatcher("/phongban/index.jsp").forward(req, resp);
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

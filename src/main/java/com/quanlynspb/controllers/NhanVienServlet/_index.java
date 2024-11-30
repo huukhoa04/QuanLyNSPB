@@ -29,9 +29,7 @@ public class _index extends HttpServlet {
             if(!arrayList.isEmpty()){;
                 String destination = "/nhanvien/index.jsp";
                 req.setAttribute("nhanvien", arrayList);
-                RequestDispatcher dispatcher = req.getRequestDispatcher(destination);
-                System.out.println(dispatcher.toString());
-                dispatcher.forward(req, resp);
+                req.getRequestDispatcher(destination).forward(req, resp);
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

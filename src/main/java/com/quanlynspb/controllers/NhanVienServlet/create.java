@@ -19,6 +19,11 @@ public class create extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/nhanvien/create.jsp").forward(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String destination = null;
@@ -34,12 +39,11 @@ public class create extends HttpServlet {
             System.out.println(req.getServletPath());
             NhanVienBo nhanVienBo = new NhanVienBo();
             NhanVien a = nhanVienBo.addNhanVien(nhanVien);
-            req.setAttribute("nhanvien", a);
-            destination = "/NhanVienServlet/detail";
-//                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(destination);
-//                dispatcher.forward(req, resp);
-            resp.sendRedirect(getServletContext() + destination);
-
+            if(a.getId().equals(nhanVien.getId())){
+                req.setAttribute("nhanvien", a);
+                req.getRequestDispatcher("/nhanvien/detail.jsp").forward(req, resp);
+            }
+            else System.out.println("Cannot");
 
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

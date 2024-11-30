@@ -30,8 +30,8 @@ public class NhanVienDao {
         return list;
     }
     public NhanVien getNhanVienById(String id) throws SQLException {
-        String sql = "select * from `nhanvien` where id = ?";
-        ResultSet rs = quanLyNspbDb.executeQuery(sql.replace("?", id));
+        String sql = MessageFormat.format("select * from `nhanvien` where id = ''{0}''", id);
+        ResultSet rs = quanLyNspbDb.executeQuery(sql);
         if (rs.next()) {
             return new NhanVien(
                     rs.getString("id"),
@@ -49,10 +49,7 @@ public class NhanVienDao {
         String address = nhanVien.getAddress();
         String sql = MessageFormat.format("INSERT INTO `nhanvien`(`id`, `hoten`, `idpb`, `diachi`) VALUES (''{0}'',''{1}'',''{2}'',''{3}'')",id, name, idpb, address );
         boolean add = quanLyNspbDb.execute(sql);
-        if (add) {
-            return nhanVien;
-        }
-        else return null;
+        return nhanVien;
     }
     public int updateNhanVien(NhanVien nhanVien) throws SQLException {
         String id = nhanVien.getId();
